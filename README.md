@@ -1,13 +1,30 @@
-Node 18.19.0
+# Web Framework
 
-pnpm 8.15.4
+## Requirements
 
+- Node 18.19.0
+- pnpm 8.15.4
+
+## Setup
+
+1. Install dependencies:
+
+```bash
 pnpm install
+```
 
-pnpm dev
+2. Copy `.env.example` to `.env` and update values.
 
-pnpm test
+3. Run database migrations and seed (API):
 
-pnpm build
+```bash
+pnpm --filter @web-framework/api prisma migrate dev
+pnpm --filter @web-framework/api prisma db seed
+```
 
-pnpm lint
+## Commands
+
+- `pnpm dev`
+- `pnpm test`
+- `pnpm build`
+- `pnpm lint`
