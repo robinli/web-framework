@@ -1,0 +1,30 @@
+{
+  "name": "web-framework",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "echo dev",
+    "build": "echo build",
+    "test": "echo test",
+    "lint": "echo lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robinli/web-framework.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robinli/web-framework/issues"
+  },
+  "homepage": "https://github.com/robinli/web-framework#readme",
+  "description": "",
+  "engines": {
+    "node": "18.19.0"
+  },
+  "packageManager": "pnpm@8.15.4",
+  "volta": {
+   "node": "18.19.0"
+  }
+}
