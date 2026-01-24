@@ -7,9 +7,12 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
+import { Request } from 'express';
 import { AuthService } from './auth.service';
 import { LoginDto } from './auth.dto';
 import { AuthGuard } from './auth.guard';
+
+type AuthenticatedRequest = Request & { user: { sub: string } };
 
 @Controller('api/auth')
 export class AuthController {
@@ -29,7 +32,7 @@ export class AuthController {
 
   @Get('me')
   @UseGuards(AuthGuard)
-  async getMe(@Req() req: any) {
+  async getMe(@Req() req: AuthenticatedRequest) {
     return this.authService.getProfile(req.user.sub);
   }
 }
