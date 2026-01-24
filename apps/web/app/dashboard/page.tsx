@@ -9,6 +9,8 @@ const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:300
 type MeResponse = {
   id: string;
   email: string;
+  roles: string[];
+  permissions: string[];
 };
 
 export default function DashboardPage() {
@@ -67,7 +69,46 @@ export default function DashboardPage() {
       <h1>Dashboard</h1>
       {error ? <p style={{ color: 'crimson' }}>{error}</p> : null}
       {user ? (
-        <p>Signed in as {user.email}</p>
+        <>
+          <p>Signed in as {user.email}</p>
+          <section style={{ marginTop: '1rem' }}>
+            <h2>Roles</h2>
+            {user.roles.length ? (
+              <ul>
+                {user.roles.map((role) => (
+                  <li key={role}>{role}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>No roles assigned.</p>
+            )}
+          </section>
+          <section style={{ marginTop: '1rem' }}>
+            <h2>Permissions</h2>
+            {user.permissions.length ? (
+              <ul>
+                {user.permissions.map((permission) => (
+                  <li key={permission}>{permission}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>No permissions assigned.</p>
+            )}
+          </section>
+          {user.permissions.includes('user.read') ? (
+            <section
+              style={{
+                marginTop: '1.5rem',
+                padding: '1rem',
+                border: '1px solid #4b9d5f',
+                borderRadius: '8px',
+              }}
+            >
+              <h2>Protected Content</h2>
+              <p>This section is visible because you have user.read.</p>
+            </section>
+          ) : null}
+        </>
       ) : (
         <p>Loading profile...</p>
       )}

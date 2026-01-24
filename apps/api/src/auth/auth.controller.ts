@@ -29,7 +29,7 @@ export class AuthController {
 
   @Get('me')
   @UseGuards(AuthGuard)
-  getMe(@Req() req: any) {
-    return { id: req.user.sub, email: req.user.email };
+  async getMe(@Req() req: any) {
+    return this.authService.getProfile(req.user.sub);
   }
 }
