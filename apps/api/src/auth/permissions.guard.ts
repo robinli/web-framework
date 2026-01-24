@@ -6,8 +6,11 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
+import { Request } from 'express';
 import { PrismaService } from '../prisma/prisma.service';
 import { REQUIRE_PERMISSIONS_KEY } from './permissions.decorator';
+
+type AuthenticatedRequest = Request & { user?: { sub: string } };
 
 @Injectable()
 export class PermissionsGuard implements CanActivate {
@@ -26,8 +29,8 @@ export class PermissionsGuard implements CanActivate {
       return true;
     }
 
-    const request = context.switchToHttp().getRequest<Request>();
-    const user = (request as any).user;
+    const request = context.switchToHttp().getRequest<AuthenticatedRequest>();
+    const user = request.user;
 
     if (!user?.sub) {
       throw new UnauthorizedException();
